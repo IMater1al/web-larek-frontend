@@ -7,34 +7,6 @@ export interface Item {
 	price: number;
 }
 
-export interface ICard {
-	cardName: string;
-	cardImage: string;
-	cardPrice: number;
-	cardCategory: string;
-	cardDescription: string;
-
-	createCard(): HTMLElement;
-	setListeners(): void;
-}
-
-export interface IBasket {
-	items: Map<string, number>;
-	add(id: number): void;
-	remove(id: number): void;
-}
-
-export interface ItemCatalog {
-	items: Item[];
-	setItems(items: Item[]): void;
-	getProduct(id: string): Item;
-}
-
-export interface Popup {
-	open(): void;
-	close(): void;
-}
-
 export type paymentMethod = 'online' | 'cash';
 
 export interface OrderInfo {
@@ -44,4 +16,65 @@ export interface OrderInfo {
 	address: string;
 	total: number;
 	items: string[];
+}
+
+export interface ICardModel {
+	items: Item[];
+	setItems(items: Item[]): void;
+	getItem(id: string): Item;
+	setCardPreview(data: Item): void;
+}
+
+export interface IBasketModel {
+	items: Item[];
+	add(id: number): void;
+	remove(id: number): void;
+	change(): void;
+	setBasketPreview(): void;
+}
+
+export interface IUserModel {
+	info: OrderInfo;
+	setPayment(value: string): void;
+	setEmail(value: string): void;
+	setPhone(value: string): void;
+	setAddress(value: string): void;
+	setTotal(value: number): void;
+	setItems(value: string[]): void;
+}
+export interface Popup {
+	render(data: HTMLElement): void;
+}
+
+export interface IBasketPopup {
+	basketContainer: HTMLElement;
+	getMarkup(data: Item[]): HTMLElement;
+	render(data: Item[]): void;
+}
+
+export interface ICardPopup {
+	cardContainer: HTMLElement;
+	getMarkup(data: Item): HTMLElement;
+	render(data: Item): void;
+}
+
+export interface IOrderPopup {
+	getMarkup(): HTMLElement;
+	render(): void;
+}
+
+export interface IContactPopup {
+	cardContainer: HTMLElement;
+	getMarkup(data: Item): HTMLElement;
+	render(data: Item): void;
+}
+
+export interface ISuccessPopup {
+	getMarkup(total: number): HTMLElement;
+	render(total: number): void;
+}
+
+export interface ICatalogView {
+	getMarkup(data: Item[]): HTMLElement;
+	render(data: Item[]): void;
 }
