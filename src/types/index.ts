@@ -4,7 +4,7 @@ export interface IPopup {
 	closeButton: HTMLButtonElement;
 
 	render(markup: HTMLElement): void;
-	close(e: Event): void;
+	close(): void;
 }
 
 export interface Product {

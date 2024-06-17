@@ -19,23 +19,23 @@ export default class CardPopup implements ICardPopup {
 	price: HTMLElement;
 	toBasketButton: HTMLButtonElement;
 
-	constructor(protected popup: IPopup, protected events: IEvents) {
+	constructor(protected popup: IPopup, protected events: IEvents) {}
+
+	_setEventListeners(data: Product) {
+		this.toBasketButton.addEventListener('click', (e) => {
+			e.stopPropagation();
+			this.popup.close();
+			this.events.emit('basket:card-add', data);
+		});
+	}
+
+	render(data: Product) {
 		this.content = cloneTemplate('#card-preview');
 		this.image = ensureElement<HTMLImageElement>('.card__image', this.content);
 		this.category = ensureElement('.card__category', this.content);
 		this.title = ensureElement('.card__title', this.content);
 		this.price = ensureElement('.card__price', this.content);
 		this.toBasketButton = ensureElement<HTMLButtonElement>('.card__button', this.content);
-	}
-
-	_setEventListeners(data: Product) {
-		this.toBasketButton.addEventListener('click', (e) => {
-			e.stopPropagation();
-			this.events.emit('basket:card-add', data);
-		});
-	}
-
-	render(data: Product) {
 		this.image.src = data.image;
 		this.category.textContent = data.category;
 		this.title.textContent = data.title;

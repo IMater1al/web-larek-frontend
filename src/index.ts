@@ -21,10 +21,27 @@ const cardModel = new CardModel(events);
 const basketPopup = new BasketPopup(popup, events, basketModel);
 const cardPopup = new CardPopup(popup, events);
 
-api.get('/api/weblarek/product').then((data: ApiProductResponse) => {
-	cardModel.setItems(data.items);
-	page.catalog = cardModel.items.map((card) => new CardView(events).render(card));
-});
+const data: ApiProductResponse = {
+	total: 1,
+	items: [
+		{
+			id: '123123-1231-23',
+			description: 'asdasdasd',
+			title: 'asdasdas',
+			image: 'https://www.com/1.jpg',
+			category: 'soft',
+			price: 750,
+		},
+	],
+};
+
+cardModel.setItems(data.items);
+page.catalog = cardModel.items.map((card) => new CardView(events).render(card));
+
+// api.get('/api/weblarek/product').then((data: ApiProductResponse) => {
+// 	cardModel.setItems(data.items);
+// 	page.catalog = cardModel.items.map((card) => new CardView(events).render(card));
+// });
 
 events.on('basket:card-add', (data: Product) => {
 	basketModel.add(data);
