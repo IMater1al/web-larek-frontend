@@ -18,8 +18,9 @@ export default class BasketItemView implements IBasketItemView {
 	}
 
 	_setEventListeners(data: Product) {
-		this.deleteButton.addEventListener('click', () => {
+		this.deleteButton.addEventListener('click', (e) => {
 			this.events.emit('basket:card-remove', data);
+			e.stopPropagation();
 		});
 	}
 

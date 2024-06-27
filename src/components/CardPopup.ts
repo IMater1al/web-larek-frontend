@@ -18,31 +18,32 @@ export default class CardPopup implements ICardPopup {
 	image: HTMLImageElement;
 	price: HTMLElement;
 	toBasketButton: HTMLButtonElement;
+	pickedCard: Product;
 
-	constructor(protected popup: IPopup, protected events: IEvents) {}
+	constructor(protected popup: IPopup, protected events: IEvents) {
+		this.content = cloneTemplate('#card-preview');
+		this.image = ensureElement<HTMLImageElement>('.card__image', this.content);
+		this.category = ensureElement<HTMLElement>('.card__category', this.content);
+		this.title = ensureElement<HTMLElement>('.card__title', this.content);
+		this.price = ensureElement<HTMLElement>('.card__price', this.content);
+		this.toBasketButton = ensureElement<HTMLButtonElement>('.card__button', this.content);
 
-	_setEventListeners(data: Product) {
+		this._setEventListeners();
+	}
+
+	_setEventListeners() {
 		this.toBasketButton.addEventListener('click', (e) => {
 			e.stopPropagation();
-			this.popup.close();
-			this.events.emit('basket:card-add', data);
+			this.events.emit('basket:card-add', this.pickedCard);
 		});
 	}
 
 	render(data: Product) {
-		this.content = cloneTemplate('#card-preview');
-		this.image = ensureElement<HTMLImageElement>('.card__image', this.content);
-		this.category = ensureElement('.card__category', this.content);
-		this.title = ensureElement('.card__title', this.content);
-		this.price = ensureElement('.card__price', this.content);
-		this.toBasketButton = ensureElement<HTMLButtonElement>('.card__button', this.content);
+		this.pickedCard = data;
 		this.image.src = data.image;
 		this.category.textContent = data.category;
 		this.title.textContent = data.title;
 		this.price.textContent = `${data.price ?? 0} синапсов`;
-
-		this._setEventListeners(data);
-
 		this.popup.render(this.content);
 	}
 }

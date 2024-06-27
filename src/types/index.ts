@@ -1,7 +1,7 @@
 export interface IPopup {
-	container: HTMLElement | null;
-	content: HTMLElement | null;
-	closeButton: HTMLButtonElement;
+	_container: HTMLElement | null;
+	_content: HTMLElement | null;
+	_closeButton: HTMLButtonElement;
 
 	render(markup: HTMLElement): void;
 	close(): void;
@@ -15,6 +15,7 @@ export interface Product {
 	category: string;
 	price: number;
 }
+
 export interface ICardView {
 	container: HTMLElement;
 	category: HTMLElement;
@@ -37,6 +38,11 @@ export interface ApiProductResponse {
 	items: Product[];
 }
 
+export interface ApiOrderResponse {
+	id: string;
+	total: number;
+}
+
 export interface ICatalogView {
 	container: HTMLElement;
 	render(data: ApiProductResponse): void;
@@ -46,6 +52,7 @@ export interface IBasketPopup {
 	content: HTMLElement;
 	basketList: HTMLElement;
 	basketPrice: HTMLElement;
+	basketButton: HTMLButtonElement;
 	render(data?: HTMLElement[]): void;
 }
 
@@ -56,6 +63,17 @@ export interface IBasketModel {
 	remove(element: Product): void;
 	changed(): void;
 }
+
+export type IOrderData = Map<string, string>;
+
+export interface IOrderPopup {
+	content: HTMLElement;
+	orderButton: HTMLButtonElement;
+	addressInput: HTMLInputElement;
+	data: Map<string, string>;
+	render(): void;
+}
+
 //---------------------------------------------------------
 // export interface Item {
 // 	id: string;

@@ -22,6 +22,20 @@ export default class BasketModel implements IBasketModel {
 		this.changed();
 	}
 
+	reset() {
+		this.items.clear();
+	}
+
+	getBasketItems(): Product[] {
+		const products: Product[] = [];
+
+		this.items.forEach((_, key) => {
+			products.push(key);
+		});
+
+		return products;
+	}
+
 	getBasketPrice(): number {
 		const total: Array<number> = [];
 		this.items.forEach((count, product) => {
@@ -32,8 +46,7 @@ export default class BasketModel implements IBasketModel {
 	}
 
 	changed() {
-		console.log(this.items);
-
+		this.events.emit('page:counter', this.items);
 		this.events.emit('basketpopup:open', this.items.keys());
 	}
 }
