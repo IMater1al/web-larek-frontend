@@ -10,7 +10,7 @@ export default class BasketPopup implements IBasketPopup {
 
 	constructor(protected popup: IPopup, protected events: IEvents) {
 		this.content = cloneTemplate('#basket');
-		this.basketList = ensureElement('.basket__list', this.content);
+		this.basketList = ensureElement<HTMLElement>('.basket__list', this.content);
 		this.basketPrice = ensureElement<HTMLElement>('.basket__price', this.content);
 		this.basketButton = ensureElement<HTMLButtonElement>('.basket__button', this.content);
 		this._setEventListeners();

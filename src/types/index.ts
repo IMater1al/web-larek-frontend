@@ -16,6 +16,28 @@ export interface Product {
 	price: number;
 }
 
+export interface ISuccessPopup {
+	content: HTMLElement;
+	render(data: ApiOrderResponse): void;
+}
+
+export interface IContactPopup {
+	content: HTMLElement;
+	emailInput: HTMLInputElement;
+	phoneInput: HTMLInputElement;
+	submitButton: HTMLButtonElement;
+	data: IOrderData;
+}
+
+export interface ICardPopup {
+	content: HTMLTemplateElement;
+	category: HTMLElement;
+	title: HTMLElement;
+	image: HTMLImageElement;
+	price: HTMLElement;
+	toBasketButton: HTMLButtonElement;
+}
+
 export interface ICardView {
 	container: HTMLElement;
 	category: HTMLElement;
@@ -73,85 +95,3 @@ export interface IOrderPopup {
 	data: Map<string, string>;
 	render(): void;
 }
-
-//---------------------------------------------------------
-// export interface Item {
-// 	id: string;
-// 	description: string;
-// 	image: string;
-// 	title: string;
-// 	category: string;
-// 	price: number;
-// }
-
-// export type paymentMethod = 'online' | 'cash';
-
-// export interface OrderInfo {
-// 	payment: paymentMethod;
-// 	email: string;
-// 	phone: string;
-// 	address: string;
-// 	total: number;
-// 	items: string[];
-// }
-
-// export interface ICardModel {
-// 	items: Item[];
-// 	setItems(items: Item[]): void;
-// 	getItem(id: string): Item;
-// 	setCardPreview(data: Item): void;
-// }
-
-// export interface IBasketModel {
-// 	items: Item[];
-// 	add(id: number): void;
-// 	remove(id: number): void;
-// 	change(): void;
-// 	setBasketPreview(): void;
-// }
-
-// export interface IUserModel {
-// 	info: OrderInfo;
-// 	setPayment(value: string): void;
-// 	setEmail(value: string): void;
-// 	setPhone(value: string): void;
-// 	setAddress(value: string): void;
-// 	setTotal(value: number): void;
-// 	setItems(value: string[]): void;
-// }
-// export interface Popup {
-// 	render(data: HTMLElement): void;
-// }
-
-// export interface IBasketPopup {
-// 	basketContainer: HTMLElement;
-// 	getMarkup(data: Item[]): HTMLElement;
-// 	render(data: Item[]): void;
-// }
-
-// export interface ICardPopup {
-// 	cardContainer: HTMLElement;
-// 	getMarkup(data: Item): HTMLElement;
-// 	render(data: Item): void;
-// }
-
-// export interface IOrderPopup {
-// 	getMarkup(): HTMLElement;
-// 	render(): void;
-// }
-
-// export interface IContactPopup {
-// 	cardContainer: HTMLElement;
-// 	getMarkup(data: Item): HTMLElement;
-// 	render(data: Item): void;
-// }
-
-// export interface ISuccessPopup {
-// 	getMarkup(total: number): HTMLElement;
-// 	render(total: number): void;
-// }
-
-// export interface ICatalogView {
-// 	getMarkup(data: Item[]): HTMLElement;
-// 	render(data: Item[]): void;
-// }

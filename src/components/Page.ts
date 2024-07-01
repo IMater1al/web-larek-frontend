@@ -2,10 +2,10 @@ import { ensureElement } from '../utils/utils';
 import { IEvents } from './base/events';
 
 export default class Page {
-	protected _counter: HTMLElement;
-	protected _catalog: HTMLElement;
-	protected _wrapper: HTMLElement;
-	protected _basket: HTMLElement;
+	_counter: HTMLElement;
+	_catalog: HTMLElement;
+	_wrapper: HTMLElement;
+	_basket: HTMLElement;
 
 	constructor(protected events: IEvents) {
 		this._counter = ensureElement<HTMLElement>('.header__basket-counter');

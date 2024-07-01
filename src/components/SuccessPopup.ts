@@ -1,9 +1,5 @@
-import { ApiOrderResponse, IPopup } from '../types';
+import { ApiOrderResponse, IPopup, ISuccessPopup } from '../types';
 import { cloneTemplate, ensureElement } from '../utils/utils';
-
-export interface ISuccessPopup {
-	content: HTMLElement;
-}
 
 export default class SuccessPopup implements ISuccessPopup {
 	content: HTMLElement;

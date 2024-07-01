@@ -1,15 +1,6 @@
-import { IPopup, Product } from '../types';
+import { ICardPopup, IPopup, Product } from '../types';
 import { cloneTemplate, ensureElement } from '../utils/utils';
 import { IEvents } from './base/events';
-
-export interface ICardPopup {
-	content: HTMLTemplateElement;
-	category: HTMLElement;
-	title: HTMLElement;
-	image: HTMLImageElement;
-	price: HTMLElement;
-	toBasketButton: HTMLButtonElement;
-}
 
 export default class CardPopup implements ICardPopup {
 	content: HTMLTemplateElement;

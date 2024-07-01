@@ -1,14 +1,6 @@
-import { IOrderData, IPopup } from '../types';
+import { IContactPopup, IOrderData, IPopup } from '../types';
 import { cloneTemplate, ensureElement } from '../utils/utils';
 import { IEvents } from './base/events';
-
-export interface IContactPopup {
-	content: HTMLElement;
-	emailInput: HTMLInputElement;
-	phoneInput: HTMLInputElement;
-	submitButton: HTMLButtonElement;
-	data: IOrderData;
-}
 
 export default class ContactPopup implements IContactPopup {
 	content: HTMLElement;
@@ -27,6 +19,7 @@ export default class ContactPopup implements IContactPopup {
 		this.data = new Map();
 		this.emailRegexp = /^\S+@\S+\.\S+$/;
 		this.phoneRegexp = /^(\+7)?[\s\\-]?\(?[489][0-9]{2}\)?[\s\\-]?[0-9]{3}[\s\\-]?[0-9]{2}[\s\\-]?[0-9]{2}$/;
+		this._setEventListeners();
 	}
 
 	_handleEmailInput() {
@@ -66,7 +59,6 @@ export default class ContactPopup implements IContactPopup {
 	}
 
 	render(): void {
-		this._setEventListeners();
 		this.popup.render(this.content);
 	}
 }

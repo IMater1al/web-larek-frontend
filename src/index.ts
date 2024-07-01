@@ -16,7 +16,6 @@ import ContactPopup from './components/ContactPopup';
 import SuccessPopup from './components/SuccessPopup';
 
 const api = new Api(process.env.API_ORIGIN);
-// const catalog = new CatalogView();
 const events = new EventEmitter();
 const popup = new Popup(events);
 const page = new Page(events);
@@ -29,11 +28,13 @@ const orderPopup = new OrderPopup(popup, events);
 const contactPopup = new ContactPopup(popup, events);
 const successPopup = new SuccessPopup(popup);
 
+// Загрузка начальных карточек
 api.get('/api/weblarek/product').then((data: ApiProductResponse) => {
 	cardModel.setItems(data.items);
 	page.catalog = cardModel.items.map((card) => new CardView(events).render(card));
 });
 
+// Ивенты добавления и удаления из корзины
 events.on('basket:card-add', (data: Product) => {
 	basketModel.add(data);
 });
@@ -42,7 +43,7 @@ events.on('basket:card-remove', (data: Product) => {
 	basketModel.remove(data);
 });
 
-//--------------------------------------
+// Ивенты открытия модальных окон
 events.on('basketpopup:open', (data: Product[]) => {
 	basketPopup.render(
 		data.map((card, index) => new BasketItemView(events).render(card, index)),
@@ -62,8 +63,7 @@ events.on('сontactpopup:open', () => {
 	contactPopup.render();
 });
 
-//--------------------------------------------
-
+// Ивенты выбора модальных окон
 events.on('basket:select', () => {
 	basketModel.changed();
 });
@@ -99,8 +99,7 @@ events.on('contact:makeorder', (data: IOrderData) => {
 		.catch((err) => console.error(err));
 });
 
-//---------------------------------
-
+// Ивенты запрета прокрутки
 events.on('modal:open', () => {
 	page.locked = true;
 });
@@ -109,7 +108,7 @@ events.on('modal:close', () => {
 	page.locked = false;
 });
 
-//----------------------------------------------
+// Ивент установки количества товаров в корзине
 
 events.on('page:counter', (data: Map<Product, number>) => {
 	page.counter = data.size;
