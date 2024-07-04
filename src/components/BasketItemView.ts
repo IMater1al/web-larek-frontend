@@ -27,7 +27,7 @@ export default class BasketItemView implements IBasketItemView {
 	render(data: Product, index: number): HTMLElement {
 		this.title.textContent = data.title;
 		this.price.textContent = `${data.price ?? 0} синапсов`;
-		this.index.textContent = `${index}`;
+		this.index.textContent = `${index + 1}`;
 
 		this._setEventListeners(data);
 

@@ -1,6 +1,7 @@
 import { ICardView, Product } from '../types';
 import { cloneTemplate, ensureElement } from '../utils/utils';
 import { IEvents } from './base/events';
+import { CDN_URL, categoryType } from '../utils/constants';
 
 export default class CardView implements ICardView {
 	container: HTMLElement;
@@ -24,10 +25,19 @@ export default class CardView implements ICardView {
 		});
 	}
 
+	_setCategoryClass(data: string) {
+		this.category.classList.add(`${categoryType[data]}`);
+	}
+
+	_getFullImageUrl(link: string): string {
+		return CDN_URL + link;
+	}
+
 	render(data: Product): HTMLElement {
+		this._setCategoryClass(data.category);
 		this.category.textContent = data.category;
 		this.title.textContent = data.title;
-		this.image.src = data.image;
+		this.image.src = this._getFullImageUrl(data.image);
 		this.price.textContent = `${data.price ?? 0} синапсов`;
 
 		this._setEventListeners(data);

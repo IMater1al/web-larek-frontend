@@ -36,6 +36,10 @@ export default class BasketModel implements IBasketModel {
 		return products;
 	}
 
+	isAlreadyInBasket(item: Product) {
+		return this.items.has(item);
+	}
+
 	getBasketPrice(): number {
 		const total: Array<number> = [];
 		this.items.forEach((count, product) => {

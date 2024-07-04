@@ -9,7 +9,6 @@ export default class Popup implements IPopup {
 
 	constructor(protected events: IEvents) {
 		this._container = ensureElement<HTMLElement>('#modal-container');
-		this._content = ensureElement<HTMLElement>('.modal__content', this._container);
 		this._closeButton = ensureElement<HTMLButtonElement>('.modal__close', this._container);
 		this._handleCloseByClick = this._handleCloseByClick.bind(this);
 		this._handleEscClose = this._handleEscClose.bind(this);
@@ -36,13 +35,15 @@ export default class Popup implements IPopup {
 	}
 
 	render(markup: HTMLElement): void {
+		this._content = ensureElement<HTMLElement>('.modal__content', this._container);
 		this._content.replaceChildren(markup);
 		this._container.classList.add('modal_active');
 		this.events.emit('modal:open');
 	}
 
 	close(): void {
-		this._content.firstChild.remove();
+		this._content = null;
+		// this._content.firstChild.remove();
 		this._container.classList.remove('modal_active');
 		this.events.emit('modal:close');
 	}

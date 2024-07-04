@@ -52,7 +52,8 @@ events.on('basketpopup:open', (data: Product[]) => {
 });
 
 events.on('cardpopup:open', (data: Product) => {
-	cardPopup.render(data);
+	const isInBasket = basketModel.isAlreadyInBasket(data);
+	cardPopup.render(data, isInBasket);
 });
 
 events.on('orderpopup:open', () => {
