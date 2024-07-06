@@ -33,7 +33,7 @@ export default class CardPopup implements ICardPopup {
 	}
 
 	_setCategoryClass(data: string) {
-		this.category.classList.add(`${categoryType[data]}`);
+		this.category.className = `card__category ${categoryType[data]}`;
 	}
 
 	_getFullImageUrl(link: string): string {
